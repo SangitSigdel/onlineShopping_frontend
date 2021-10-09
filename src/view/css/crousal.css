@@ -1,0 +1,29 @@
+.crousal__container {
+  display: flex;
+  height: 83vh;
+  /* background: red; */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.icon__crousal {
+  font-size: 60px;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+}
+
+.icon__previous {
+  left: 5%;
+}
+
+.icon__next {
+  right: 5%;
+}
