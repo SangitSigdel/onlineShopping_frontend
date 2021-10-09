@@ -1,9 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+import { promotionalAction } from "../controller/actions";
 
 import "./css/section1.css";
 import Card from "./card";
 
 class Section1 extends React.Component {
+  async componentDidMount() {
+    this.props.promotionalAction();
+  }
+
   renderList() {
     if (this.props.products.length > 0) {
       return this.props.products.map((product) => {
@@ -66,7 +72,7 @@ class Section1 extends React.Component {
         </div>
         <div className="section1__top-products">
           <div className="top-products__headerText">
-            <h1>Top Products</h1>
+            <h1>Best Products</h1>
             <h3>Product that will transform you life</h3>
           </div>
           <div className="grid">{this.renderTopProducts()}</div>
@@ -78,4 +84,8 @@ class Section1 extends React.Component {
   }
 }
 
-export default Section1;
+const mapStateToProps = (state) => {
+  return { products: state.products };
+};
+
+export default connect(mapStateToProps, { promotionalAction })(Section1);

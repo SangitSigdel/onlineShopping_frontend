@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 import "./css/crousal.css";
+import { sliderAction } from "../controller/actions";
 
 class ImageCrousal extends React.Component {
   state = {
@@ -10,6 +12,7 @@ class ImageCrousal extends React.Component {
   };
 
   async componentDidMount() {
+    await this.props.sliderAction();
     const listImages = [];
     if (this.props.products.length > 0) {
       this.props.products.map((data) => {
@@ -30,18 +33,24 @@ class ImageCrousal extends React.Component {
   }
 
   nextSlide = () => {
-    if (this.state.slider_counter < this.state.images.length) {
+    if (this.state.slider_counter < this.state.images.length - 1) {
       this.setState({ slider_counter: this.state.slider_counter + 1 });
+      console.log("I pressed next slide", this.state.slider_counter);
     } else {
       this.setState({ slider_counter: 0 });
     }
   };
 
   previousSlide = () => {
-    if (this.state.slider_counter >= 0) {
+    console.log(
+      "the present state of slider counter is",
+      this.state.slider_counter
+    );
+    if (this.state.slider_counter > 0) {
       this.setState({ slider_counter: this.state.slider_counter - 1 });
+      console.log(this.state.slider_counter);
     } else {
-      this.setState({ slider_counter: this.state.images.length });
+      this.setState({ slider_counter: this.state.images.length - 1 });
     }
   };
 
@@ -50,7 +59,7 @@ class ImageCrousal extends React.Component {
       <div className="crousal__container">
         <img
           src={this.state.images[this.state.slider_counter]}
-          alt={this.state.images[this.state.slider_counter]}
+          alt={this.props.products.name}
         />
 
         <GrFormPrevious
@@ -66,4 +75,8 @@ class ImageCrousal extends React.Component {
   }
 }
 
-export default ImageCrousal;
+const mapStateToProps = (state) => {
+  return { products: state.products };
+};
+
+export default connect(mapStateToProps, { sliderAction })(ImageCrousal);
