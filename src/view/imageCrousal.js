@@ -35,17 +35,12 @@ class ImageCrousal extends React.Component {
   nextSlide = () => {
     if (this.state.slider_counter < this.state.images.length - 1) {
       this.setState({ slider_counter: this.state.slider_counter + 1 });
-      console.log("I pressed next slide", this.state.slider_counter);
     } else {
       this.setState({ slider_counter: 0 });
     }
   };
 
   previousSlide = () => {
-    console.log(
-      "the present state of slider counter is",
-      this.state.slider_counter
-    );
     if (this.state.slider_counter > 0) {
       this.setState({ slider_counter: this.state.slider_counter - 1 });
       console.log(this.state.slider_counter);

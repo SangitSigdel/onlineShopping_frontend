@@ -13,7 +13,7 @@ export const sliderAction = () => {
 
 export const promotionalAction = () => {
   return async function (dispatch) {
-    const response = await shoppingApi.get("/product?slider=true");
+    const response = await shoppingApi.get("/product?promotional=true");
 
     dispatch({
       type: "FETCH__PROMOTIONAL__DATA",
