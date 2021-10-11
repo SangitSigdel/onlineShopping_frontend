@@ -10,26 +10,11 @@ import homeAppliances_img from "../img/homeAppliances_img.jpeg";
 import digitalCamera_img from "../img/digitalCamera.jpeg";
 
 import "./css/section1.css";
-import Card from "./card";
+import CustomButton from "./customButton";
 
 class Section1 extends React.Component {
   async componentDidMount() {
     this.props.promotionalAction();
-  }
-
-  renderList() {
-    if (this.props.products.length > 0) {
-      return this.props.products.map((product) => {
-        return (
-          <div key={product._id}>
-            <h1>{product.name}</h1>
-            <h2>{product.price}</h2>
-            <p>{product.description}</p>
-            <p>ImageURL: {product.images}</p>
-          </div>
-        );
-      });
-    }
   }
 
   renderCategories() {
@@ -75,7 +60,6 @@ class Section1 extends React.Component {
   }
 
   renderTopProducts() {
-    const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     if (this.props.products.length > 0) {
       return this.props.products.map((el) => {
         return (
@@ -85,7 +69,9 @@ class Section1 extends React.Component {
             <div className="image__container">
               <img src={el.images[0]} />
             </div>
-            <h3>This is the actual card i was talking about</h3>
+            <p>{el.description}</p>
+            <h1>£ {el.price}</h1>
+            <CustomButton button_text="Add To Cart" />
           </div>
         );
       });
@@ -111,8 +97,6 @@ class Section1 extends React.Component {
           </div>
           <div className="grid">{this.renderTopProducts()}</div>
         </div>
-        {/* {this.renderList()} */}
-        {/* <Card /> */}
       </div>
     );
   }

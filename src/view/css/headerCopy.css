@@ -22,6 +22,7 @@
 
 .logo {
   margin-right: 80px;
+  cursor: progress;
 }
 
 .navbar__container {
@@ -52,11 +53,42 @@
   list-style: none;
 }
 
+.item:hover {
+  font-size: 2rem;
+  transition: 0.5s ease-out;
+}
+
 .item {
   text-decoration: none;
   padding: 0 40px;
   color: var(--white);
   font-size: 20px;
+}
+
+.cart__icon {
+  position: absolute;
+  right: 5%;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.notification__circle {
+  /* height: 23px; */
+  min-height: 25px;
+  position: absolute;
+  min-width: 25px;
+  text-align: center;
+  padding: 3px;
+  background: red;
+  right: -50%;
+  top: 30%;
+  font-size: 15px;
+  border-radius: 20px;
+}
+
+.cart__icon:hover {
+  font-size: 28px;
+  transition: 0.5s ease;
 }
 
 @media (max-width: 990px) {

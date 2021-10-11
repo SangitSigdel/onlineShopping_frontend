@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 
 import "./css/headerCopy.css";
 
@@ -66,6 +67,10 @@ const Header = () => {
         <div className="regular__menu">{menuItems()}</div>
         {menu && <div className="mobile__menu">{menuItems()}</div>}
         {!menu ? hamburgerIcon : closeIcon}
+        <div className="cart__icon">
+          <FaShoppingCart />
+          <section className="notification__circle">1</section>
+        </div>
       </div>
     </div>
   );
