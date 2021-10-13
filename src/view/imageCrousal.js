@@ -22,7 +22,10 @@ class ImageCrousal extends React.Component {
 
       this.setState({ images: listImages });
     }
+    this.runSlider();
+  }
 
+  runSlider() {
     setInterval(() => {
       if (this.state.slider_counter < this.state.images.length - 1) {
         this.setState({ slider_counter: this.state.slider_counter + 1 });

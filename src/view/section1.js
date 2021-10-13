@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { promotionalAction } from "../controller/actions";
+import { promotionalAction, addToCartAction } from "../controller/actions";
 
 import mobile_img from "../img/mobile_img.png";
 import laptop_img from "../img/laptop_img.jpeg";
@@ -64,14 +64,20 @@ class Section1 extends React.Component {
       return this.props.products.map((el) => {
         return (
           <div className="display__card" key={el.name}>
-            {console.log(el)}
             <h2>{el.name}</h2>
             <div className="image__container">
-              <img src={el.images[0]} />
+              <img src={el.images[0]} alt={el.name} />
             </div>
             <p>{el.description}</p>
             <h1>£ {el.price}</h1>
-            <CustomButton button_text="Add To Cart" />
+            <div
+              onClick={() => {
+                this.props.addToCartAction(el);
+                this.props.fn_cartCount(this.props.cart.length);
+              }}
+            >
+              <CustomButton button_text="Add To Cart" />
+            </div>
           </div>
         );
       });
@@ -103,7 +109,9 @@ class Section1 extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { products: state.products };
+  return { products: state.products, cart: state.cart };
 };
 
-export default connect(mapStateToProps, { promotionalAction })(Section1);
+export default connect(mapStateToProps, { promotionalAction, addToCartAction })(
+  Section1
+);

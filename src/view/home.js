@@ -9,7 +9,7 @@ class Home extends React.Component {
     return (
       <div>
         <ImageCrousal />
-        <Section1 />
+        <Section1 fn_cartCount={this.props.fn_cartCount} />
         <Footer />
       </div>
     );

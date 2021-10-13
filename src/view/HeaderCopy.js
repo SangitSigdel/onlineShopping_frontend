@@ -2,19 +2,28 @@ import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import history from "../historyRouter";
 
 import "./css/headerCopy.css";
+import { connect } from "react-redux";
 
-const Header = () => {
-  const [menu, setMenu] = useState(false);
-  const menuItems = () => {
+class Header extends React.Component {
+  state = {
+    menu: false,
+    cardCount: 0,
+  };
+
+  menuItems = () => {
     return (
       <ul
         className="menu__items"
         onClick={() => {
-          setMenu(!menu);
+          if (this.state.menu === false) {
+            this.setState({ menu: true });
+          } else {
+            this.setState({ menu: true });
+          }
         }}
       >
         <li>
@@ -41,39 +50,67 @@ const Header = () => {
     );
   };
 
-  const hamburgerIcon = (
+  hamburgerIcon = (
     <GiHamburgerMenu
       className="hamburgerMenu"
       onClick={() => {
-        setMenu(!menu);
+        if (!this.state.menu) {
+          this.setState({ menu: true });
+        } else {
+          this.setState({ menu: false });
+        }
       }}
     />
   );
-  const closeIcon = (
+
+  closeIcon = (
     <MdClose
       className="closeBtn"
       onClick={() => {
-        setMenu(!menu);
+        if (!this.state.menu) {
+          this.setState({ menu: true });
+        } else {
+          this.setState({ menu: false });
+        }
       }}
     />
   );
 
-  return (
-    <div className="navbar">
-      <div className="navbar__container">
-        <div className="logo">
-          <h1>LOGO</h1>
-        </div>
-        <div className="regular__menu">{menuItems()}</div>
-        {menu && <div className="mobile__menu">{menuItems()}</div>}
-        {!menu ? hamburgerIcon : closeIcon}
-        <div className="cart__icon">
-          <FaShoppingCart />
-          <section className="notification__circle">1</section>
+  render() {
+    return (
+      <div className="navbar">
+        <div className="navbar__container">
+          <div className="logo">
+            <h1>LOGO</h1>
+          </div>
+          <div className="regular__menu">{this.menuItems()}</div>
+          {this.state.menu && (
+            <div className="mobile__menu">{this.menuItems()}</div>
+          )}
+          {!this.state.menu ? this.hamburgerIcon : this.closeIcon}
+          <div
+            className="cart__icon"
+            onClick={() => {
+              history.push("/cart");
+            }}
+          >
+            <FaShoppingCart />
+            <section>
+              {this.props.cart.length > 0 && (
+                <div className="notification__circle">
+                  {this.props.cart.length}
+                </div>
+              )}
+            </section>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return { cart: state.cart };
 };
 
-export default Header;
+export default connect(mapStateToProps, {})(Header);

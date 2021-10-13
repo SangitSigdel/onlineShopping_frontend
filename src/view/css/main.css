@@ -10,3 +10,10 @@ body {
   background: #2e2d2df3;
   font-family: "Lato", sans-serif;
 }
+
+.header {
+  position: -webkit-sticky; /* Safari & IE */
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}

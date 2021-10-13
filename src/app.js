@@ -1,28 +1,35 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import "./view/css/main.css";
-import Home from "./view/home";
-import Cart from "./view/Cart";
-import Products from "./view/Products";
 import Header from "./view/HeaderCopy";
-import About from "./view/About";
 import historyRouter from "./historyRouter";
+import Routes from "./controller/Routes";
 
-const App = () => {
-  return (
-    <div>
-      <Router history={historyRouter}>
-        <div>
-          <Header />
-          <Route path="/" exact component={Home} />
-          <Route path="/products" exact component={Products} />
-          <Route path="/cart" exact component={Cart} />
-          <Route path="/about" exact component={About} />
-        </div>
-      </Router>
-    </div>
-  );
-};
+class App extends React.Component {
+  state = {
+    cartCount: 0,
+  };
+
+  fn_cartCount = (count) => {
+    this.setState({ cartCount: count });
+    return this.state.cartCount;
+  };
+
+  render() {
+    return (
+      <div>
+        <Router history={historyRouter}>
+          <div>
+            <div className="header">
+              <Header fn_cartCount={this.fn_cartCount} />
+            </div>
+            <Routes fn_cartCount={this.fn_cartCount} />
+          </div>
+        </Router>
+      </div>
+    );
+  }
+}
 
 export default App;
