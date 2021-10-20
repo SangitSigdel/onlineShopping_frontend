@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { promotionalAction, addToCartAction } from "../controller/actions";
+import {
+  promotionalAction,
+  addToCartAction,
+  modifyProductQuantity,
+} from "../controller/actions";
 
 import mobile_img from "../img/mobile_img.png";
 import laptop_img from "../img/laptop_img.jpeg";
@@ -59,6 +63,23 @@ class Section1 extends React.Component {
     });
   }
 
+  addToCart(product) {
+    const obj = this.props.cart;
+
+    let added = false;
+    Object.keys(obj).forEach((key) => {
+      console.log(obj[key]);
+      if (obj[key].product._id === product._id) {
+        added = true;
+        alert("Item already added");
+      }
+    });
+    if (!added) {
+      this.props.addToCartAction(product, 1);
+      this.props.fn_cartCount(this.props.cart.length);
+    }
+  }
+
   renderTopProducts() {
     if (this.props.products.length > 0) {
       return this.props.products.map((el) => {
@@ -72,8 +93,7 @@ class Section1 extends React.Component {
             <h1>£ {el.price}</h1>
             <div
               onClick={() => {
-                this.props.addToCartAction(el);
-                this.props.fn_cartCount(this.props.cart.length);
+                this.addToCart(el);
               }}
             >
               <CustomButton button_text="Add To Cart" />
@@ -112,6 +132,8 @@ const mapStateToProps = (state) => {
   return { products: state.products, cart: state.cart };
 };
 
-export default connect(mapStateToProps, { promotionalAction, addToCartAction })(
-  Section1
-);
+export default connect(mapStateToProps, {
+  promotionalAction,
+  addToCartAction,
+  modifyProductQuantity,
+})(Section1);

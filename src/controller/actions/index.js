@@ -22,10 +22,13 @@ export const promotionalAction = () => {
   };
 };
 
-export const addToCartAction = (product) => {
+export const addToCartAction = (product, quantity) => {
   return {
     type: "ADD_PRODUCT_TO_CART",
-    payload: product,
+    payload: {
+      product,
+      quantity: quantity,
+    },
   };
 };
 
@@ -33,5 +36,15 @@ export const removeFromCartAction = (product) => {
   return {
     type: "REMOVE_PRODUCT_FROM_CART",
     payload: product,
+  };
+};
+
+export const modifyProductQuantity = (product, increment) => {
+  return {
+    type: "MODIFY_PRODUCT_QUANTITY",
+    payload: {
+      product,
+      increment,
+    },
   };
 };

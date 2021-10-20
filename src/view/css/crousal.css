@@ -15,9 +15,13 @@ img {
 
 .icon__crousal {
   font-size: 60px;
-  color: white;
   position: absolute;
   cursor: pointer;
+}
+
+.icon__crousal:hover {
+  font-size: 70px;
+  transition: 0.3s ease-out;
 }
 
 .icon__previous {

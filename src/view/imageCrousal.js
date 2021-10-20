@@ -1,28 +1,37 @@
 import React from "react";
 import { connect } from "react-redux";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { FcPrevious, FcNext } from "react-icons/fc";
 
 import "./css/crousal.css";
 import { sliderAction } from "../controller/actions";
 
 class ImageCrousal extends React.Component {
+  _isMounted = false;
+
   state = {
     images: [],
     slider_counter: 0,
   };
 
   async componentDidMount() {
-    await this.props.sliderAction();
-    const listImages = [];
-    if (this.props.products.length > 0) {
-      this.props.products.map((data) => {
-        listImages.push(data.images[0]);
-        return null;
-      });
+    this._isMounted = true;
+    if (this._isMounted) {
+      await this.props.sliderAction();
+      const listImages = [];
+      if (this.props.products.length > 0) {
+        this.props.products.map((data) => {
+          listImages.push(data.images[0]);
+          return null;
+        });
 
-      this.setState({ images: listImages });
+        this.setState({ images: listImages });
+      }
+      this.runSlider();
     }
-    this.runSlider();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   runSlider() {
@@ -60,11 +69,11 @@ class ImageCrousal extends React.Component {
           alt={this.props.products.name}
         />
 
-        <GrFormPrevious
+        <FcPrevious
           className="icon__crousal icon__previous"
           onClick={() => this.previousSlide()}
         />
-        <GrFormNext
+        <FcNext
           className="icon__crousal icon__next"
           onClick={() => this.nextSlide()}
         />
