@@ -9,12 +9,9 @@
 }
 
 .cart__product-container {
-  background: #17141d;
   position: relative;
-  left: 10%;
   margin: 50px 10px;
   padding: 20px;
-  width: 80vw;
   color: white;
 }
 
@@ -25,7 +22,6 @@
   gap: 20px;
   margin-bottom: 20px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  /* box-shadow: 0 0 2px #fff; */
 }
 
 .cart__product-del-icon {
@@ -82,4 +78,48 @@
 
 .remove_Btn:hover {
   background-color: red;
+}
+
+.cart__products {
+  display: flex;
+  gap: 2rem;
+}
+
+.cart__total {
+  background-color: #17141d;
+  height: 30vh;
+  padding: 20px;
+}
+
+.cart__products__display {
+  background: #17141d;
+  padding: 20px;
+}
+
+.empty__cart {
+  background-color: #17141d;
+  padding: 20px;
+  position: relative;
+  left: 5%;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.cart__total {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: center;
+}
+
+.cart__total-display {
+  display: flex;
+  gap: 10px;
+}
+
+.custom__button {
+  /* background-color: rgba(19, 180, 27, 0.966); */
 }

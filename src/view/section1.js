@@ -12,6 +12,7 @@ import desktop_img from "../img/desktop_img.jpeg";
 import gamingConsole_img from "../img/gamingConsole_img.jpeg";
 import homeAppliances_img from "../img/homeAppliances_img.jpeg";
 import digitalCamera_img from "../img/digitalCamera.jpeg";
+import history from "../historyRouter";
 
 import "./css/section1.css";
 import CustomButton from "./customButton";
@@ -21,23 +22,35 @@ class Section1 extends React.Component {
     this.props.promotionalAction();
   }
 
+  category_click(product) {
+    history.push({
+      pathname: `/products`,
+      search: `category=${product[1].category}`,
+      state: { searchFor: `${product[1].category}` },
+    });
+  }
+
   renderCategories() {
     const categories = {
       mobile: {
         name: "Mobile Phones",
         src: mobile_img,
+        category: "mobile",
       },
       Laptops: {
         name: "Laptops",
         src: laptop_img,
+        category: "laptop",
       },
       desktop_computers: {
         name: "Desktop Computers",
         src: desktop_img,
+        category: "desktop",
       },
       gaming_consoles: {
         name: "Gaming Consoles",
         src: gamingConsole_img,
+        category: "gaming_console",
       },
       home_appliances: {
         name: "Home Appliances",
@@ -49,9 +62,15 @@ class Section1 extends React.Component {
       },
     };
 
-    return Object.entries(categories).map(function (key, index) {
+    return Object.entries(categories).map((key, index) => {
       return (
-        <div className="card" key={key[0]}>
+        <div
+          className="card"
+          key={key[0]}
+          onClick={() => {
+            this.category_click(key);
+          }}
+        >
           <div className="card-header">
             <h2>{key[1].name}</h2>
             <div className="card__image">

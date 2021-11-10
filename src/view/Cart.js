@@ -3,6 +3,10 @@ import Footer from "./footer";
 import { connect } from "react-redux";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 
+import history from "../historyRouter";
+
+import CustomButton from "./customButton";
+
 import {
   removeFromCartAction,
   modifyProductQuantity,
@@ -26,7 +30,7 @@ const Cart = (props) => {
     return price * total_quanity;
   };
 
-  const addedCart = () => {
+  const carItems = () => {
     return props.cart.map((el) => {
       return (
         <div className="cart__product-contents" key={el.product._id}>
@@ -73,6 +77,41 @@ const Cart = (props) => {
         </div>
       );
     });
+  };
+
+  const calculateGrandTotal = () => {
+    let toatlPrice = 0;
+    props.cart.map((el) => {
+      let quantity = el.quantity;
+      let price = el.product.price;
+      toatlPrice = toatlPrice + quantity * price;
+      return 0;
+    });
+    return toatlPrice;
+  };
+
+  const addedCart = () => {
+    return (
+      <div>
+        <div className="cart__products">
+          <div className="cart__products__display">{carItems()}</div>
+          <div className="cart__total">
+            <h2>Order Summary</h2>
+            <div className="cart__total-display">
+              <h3>Sub Total : </h3>
+              <h3> £ {calculateGrandTotal()} </h3>
+            </div>
+            <div
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              <CustomButton button_text="Checkout" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   const emptyCart = () => {

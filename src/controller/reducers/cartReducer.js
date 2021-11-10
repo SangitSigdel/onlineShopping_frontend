@@ -15,6 +15,7 @@ const cartReducer = (state = [], action) => {
           new_Object[key].quantity = new_Object[key].quantity - 1;
         }
       }
+      return null;
     });
     return new_Object;
   } else {
