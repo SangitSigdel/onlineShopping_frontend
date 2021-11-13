@@ -16,6 +16,7 @@ import history from "../historyRouter";
 
 import "./css/section1.css";
 import CustomButton from "./customButton";
+import ProductDisplayComponent from "./component/ProductDisplayComponent";
 
 class Section1 extends React.Component {
   async componentDidMount() {
@@ -24,7 +25,7 @@ class Section1 extends React.Component {
 
   category_click(product) {
     history.push({
-      pathname: `/products`,
+      pathname: `/product`,
       search: `category=${product[1].category}`,
       state: { searchFor: `${product[1].category}` },
     });
@@ -82,47 +83,6 @@ class Section1 extends React.Component {
     });
   }
 
-  addToCart(product) {
-    const obj = this.props.cart;
-
-    let added = false;
-    Object.keys(obj).forEach((key) => {
-      console.log(obj[key]);
-      if (obj[key].product._id === product._id) {
-        added = true;
-        alert("Item already added");
-      }
-    });
-    if (!added) {
-      this.props.addToCartAction(product, 1);
-      this.props.fn_cartCount(this.props.cart.length);
-    }
-  }
-
-  renderTopProducts() {
-    if (this.props.products.length > 0) {
-      return this.props.products.map((el) => {
-        return (
-          <div className="display__card" key={el.name}>
-            <h2>{el.name}</h2>
-            <div className="image__container">
-              <img src={el.images[0]} alt={el.name} />
-            </div>
-            <p>{el.description}</p>
-            <h1>£ {el.price}</h1>
-            <div
-              onClick={() => {
-                this.addToCart(el);
-              }}
-            >
-              <CustomButton button_text="Add To Cart" />
-            </div>
-          </div>
-        );
-      });
-    }
-  }
-
   render() {
     return (
       <div className="section1__container">
@@ -140,7 +100,7 @@ class Section1 extends React.Component {
             <h1>Featured Products</h1>
             <h3>Product that will transform you life</h3>
           </div>
-          <div className="grid">{this.renderTopProducts()}</div>
+          <ProductDisplayComponent products={this.props.topProducts} fn_cartCount={this.props.fn_cartCount} />
         </div>
       </div>
     );
@@ -148,7 +108,8 @@ class Section1 extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { products: state.products, cart: state.cart };
+
+  return { products: state.products, cart: state.cart,topProducts:state.topProducts };
 };
 
 export default connect(mapStateToProps, {

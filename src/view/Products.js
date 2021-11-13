@@ -1,16 +1,34 @@
-import { render } from "@testing-library/react";
-import React, { useEffect } from "react";
-import { useLocation, useParams, useRouteMatch } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import { connect } from "react-redux";
 
-import shoppingApi from "../controller/api/shoppingApi";
+import { searchedProducts } from "../controller/actions";
+import ProductDisplayComponent from "./component/ProductDisplayComponent";
 
-const Products = () => {
-  // let { url } = useRouteMatch();
-  let { id } = useParams();
-  // let abc = find(parseInt(id));
 
-  console.log("the main data is ", id);
-  return <div>products</div>;
-};
+const Products=(props)=>{
+  
+  let productName = ""
+  const {search} = useLocation() 
+    const searchParams = new URLSearchParams(search)
+    productName = searchParams.get('category')
+  
+  useEffect(()=>{
+    props.searchedProducts(productName)
+  },[])
 
-export default Products;
+    return(
+      <div>
+      <h1>Products</h1>
+      <ProductDisplayComponent products={props.productSearched} fn_cartCount={props.fn_cartCount} />
+    </div>
+    )
+  }
+
+const mapStateToProps=(state)=>{
+  return({
+    productSearched:state.productSearched
+  })
+}
+
+export default connect(mapStateToProps,{searchedProducts})(Products)

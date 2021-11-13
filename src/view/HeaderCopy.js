@@ -4,14 +4,14 @@ import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import history from "../historyRouter";
+import SearchBar from "./SearchBar";
 
 import "./css/headerCopy.css";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
   state = {
-    menu: false,
-    cardCount: 0,
+    menu: false
   };
 
   menuItems = () => {
@@ -86,7 +86,8 @@ class Header extends React.Component {
           <div className="regular__menu">{this.menuItems()}</div>
           {this.state.menu && (
             <div className="mobile__menu">{this.menuItems()}</div>
-          )}
+            )}
+            <SearchBar/>
           {!this.state.menu ? this.hamburgerIcon : this.closeIcon}
           <div
             className="cart__icon"

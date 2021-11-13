@@ -48,3 +48,13 @@ export const modifyProductQuantity = (product, increment) => {
     },
   };
 };
+
+export const searchedProducts = (productName)=>{
+  return async function(dispatch){
+    const response= await shoppingApi.get(`/product?category=${productName}`)
+    dispatch({
+      type:'SEARCHED_PRODUCTS',
+      payload:response.data.data
+    })
+  }
+}

@@ -14,8 +14,8 @@ const Routes = ({ fn_cartCount }) => {
         <Route path="/" exact>
           <Home fn_cartCount={fn_cartCount} />
         </Route>
-        <Route path="/products/" exact>
-          <Products />
+        <Route path="/product/" exact>
+          <Products fn_cartCount={fn_cartCount}/>
         </Route>
         <Route path="/about" exact>
           <About />
