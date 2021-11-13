@@ -6,3 +6,10 @@
   padding-left: 50px;
   font-size: 20px;
 }
+
+@media (max-width: 1550px) {
+  .search__bar {
+    width: 200px;
+    font-size: 15px;
+  }
+}

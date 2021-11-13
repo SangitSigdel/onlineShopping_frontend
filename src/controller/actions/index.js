@@ -51,7 +51,8 @@ export const modifyProductQuantity = (product, increment) => {
 
 export const searchedProducts = (productName)=>{
   return async function(dispatch){
-    const response= await shoppingApi.get(`/product?category=${productName}`)
+    let response=''
+    productName?response= await shoppingApi.get(`/product?category=${productName}`):response = await shoppingApi.get(`/product`)
     dispatch({
       type:'SEARCHED_PRODUCTS',
       payload:response.data.data

@@ -56,10 +56,12 @@ class Section1 extends React.Component {
       home_appliances: {
         name: "Home Appliances",
         src: homeAppliances_img,
+        category:"home_appliances"
       },
       digital_cameras: {
         name: "Digital Cameras",
         src: digitalCamera_img,
+        category:"digital_camera"
       },
     };
 

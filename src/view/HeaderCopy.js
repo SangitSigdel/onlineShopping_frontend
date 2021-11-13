@@ -14,15 +14,17 @@ class Header extends React.Component {
     menu: false
   };
 
-  menuItems = () => {
+  menuItems = (menu_Type) => {
     return (
       <ul
         className="menu__items"
         onClick={() => {
-          if (this.state.menu === false) {
-            this.setState({ menu: true });
-          } else {
-            this.setState({ menu: true });
+          if(menu_Type==="mobile"){
+            if (this.state.menu === false) {
+              this.setState({ menu: true });
+            } else {
+              this.setState({ menu: true });
+            }
           }
         }}
       >
@@ -32,7 +34,7 @@ class Header extends React.Component {
           </Link>
         </li>
         <li>
-          <Link to="/products" className="item">
+          <Link to="/product" className="item">
             Products
           </Link>
         </li>
@@ -85,7 +87,7 @@ class Header extends React.Component {
           </div>
           <div className="regular__menu">{this.menuItems()}</div>
           {this.state.menu && (
-            <div className="mobile__menu">{this.menuItems()}</div>
+            <div className="mobile__menu">{this.menuItems("mobile")}</div>
             )}
             <SearchBar/>
           {!this.state.menu ? this.hamburgerIcon : this.closeIcon}
