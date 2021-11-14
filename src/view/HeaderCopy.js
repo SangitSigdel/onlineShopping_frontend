@@ -95,7 +95,7 @@ class Header extends React.Component {
                 history.push("/");
               }}
             >
-              ONESHOP
+              ONESHOPPING
             </h1>
           </div>
           <div className="regular__menu">{this.menuItems()}</div>
