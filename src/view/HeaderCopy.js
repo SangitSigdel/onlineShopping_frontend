@@ -2,7 +2,7 @@ import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import history from "../historyRouter";
 import SearchBar from "./SearchBar";
 
@@ -11,23 +11,20 @@ import { connect } from "react-redux";
 
 class Header extends React.Component {
   state = {
-    menu: false
+    menu: false,
+    searchbar_bottom: false,
   };
+
+  collapseMenu(menu_Type) {
+    if (menu_Type === "mobile") {
+      this.state.menu && this.setState({ menu: false });
+    }
+    console.log("hello from me", this.state.menu, menu_Type);
+  }
 
   menuItems = (menu_Type) => {
     return (
-      <ul
-        className="menu__items"
-        onClick={() => {
-          if(menu_Type==="mobile"){
-            if (this.state.menu === false) {
-              this.setState({ menu: true });
-            } else {
-              this.setState({ menu: true });
-            }
-          }
-        }}
-      >
+      <ul className="menu__items" onClick={() => this.collapseMenu(menu_Type)}>
         <li>
           <Link to="/" className="item">
             Home
@@ -78,18 +75,47 @@ class Header extends React.Component {
     />
   );
 
+  bottom_searchBar() {
+    if (this.state.searchbar_bottom) {
+      return (
+        <div className="search__bar-bottom">
+          <SearchBar />
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div className="navbar">
         <div className="navbar__container">
           <div className="logo">
-            <h1>LOGO</h1>
+            <h1
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              ONESHOP
+            </h1>
           </div>
           <div className="regular__menu">{this.menuItems()}</div>
           {this.state.menu && (
             <div className="mobile__menu">{this.menuItems("mobile")}</div>
-            )}
-            <SearchBar/>
+          )}
+          <div className="search__bar-top">
+            <SearchBar />
+          </div>
+          <div className="search__icon">
+            <FaSearch
+              onClick={() => {
+                if (!this.state.searchbar_bottom) {
+                  this.setState({ searchbar_bottom: true });
+                } else {
+                  this.setState({ searchbar_bottom: false });
+                }
+              }}
+            />
+          </div>
           {!this.state.menu ? this.hamburgerIcon : this.closeIcon}
           <div
             className="cart__icon"
@@ -107,6 +133,7 @@ class Header extends React.Component {
             </section>
           </div>
         </div>
+        {this.bottom_searchBar()}
       </div>
     );
   }

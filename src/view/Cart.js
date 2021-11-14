@@ -45,35 +45,37 @@ const Cart = (props) => {
               <h4>{el.product.description}</h4>
             </div>
           </div>
-          <div className="add__remove-btn">
-            <div
-              className="remove_Btn"
-              onClick={() => {
-                decreaseQuantity(el, el.quantity);
-              }}
-            >
-              -
+          <div className="cart__product_actions">
+            <div className="add__remove-btn">
+              <div
+                className="remove_Btn"
+                onClick={() => {
+                  decreaseQuantity(el, el.quantity);
+                }}
+              >
+                -
+              </div>
+              <div className="product__quantity">{el.quantity}</div>
+              <div
+                className="add_Btn"
+                onClick={() => {
+                  increaseQuantity(el, el.quantity);
+                }}
+              >
+                +
+              </div>
             </div>
-            <div className="product__quantity">{el.quantity}</div>
-            <div
-              className="add_Btn"
-              onClick={() => {
-                increaseQuantity(el, el.quantity);
-              }}
-            >
-              +
-            </div>
-          </div>
 
-          <div className="cart__product-price">
-            <h3>£ {calculateTotalPrice(el.product.price, el.quantity)}</h3>
+            <div className="cart__product-price">
+              <h3>£ {calculateTotalPrice(el.product.price, el.quantity)}</h3>
+            </div>
+            <RiDeleteBin7Fill
+              className="cart__product-del-icon"
+              onClick={() => {
+                props.removeFromCartAction(el);
+              }}
+            />
           </div>
-          <RiDeleteBin7Fill
-            className="cart__product-del-icon"
-            onClick={() => {
-              props.removeFromCartAction(el);
-            }}
-          />
         </div>
       );
     });
