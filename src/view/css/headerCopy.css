@@ -129,6 +129,7 @@
     height: 400px;
     z-index: 999;
     background: var(--dark);
+    margin-top: 20px;
   }
 
   .link {

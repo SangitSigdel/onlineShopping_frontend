@@ -14,21 +14,10 @@ const Products = (props) => {
 
   useEffect(() => {
     props.searchedProducts(productName);
-  }, []);
-
-  const displayHeading = () => {
-    let heading = "abc";
-    if (productName.length > 0) {
-      heading = `Search Result For ${productName}`;
-    } else {
-      heading = "Listing all Products";
-    }
-    return heading;
-  };
+  }, [props.productSearched]);
 
   return (
     <div>
-      <h1 className="productListing_heading">{displayHeading()}</h1>
       <ProductDisplayComponent
         products={props.productSearched}
         fn_cartCount={props.fn_cartCount}

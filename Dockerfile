@@ -1,5 +1,5 @@
 FROM node:10.19.0
-WORKDIR /usr/src/projects/front_end
+WORKDIR /usr/src
 COPY ./ ./
 RUN npm install
 RUN npm audit fix

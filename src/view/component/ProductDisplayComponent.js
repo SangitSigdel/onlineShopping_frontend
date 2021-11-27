@@ -11,7 +11,6 @@ class ProductDisplayComponent extends React.Component {
 
     let added = false;
     Object.keys(obj).forEach((key) => {
-      console.log(obj[key]);
       if (obj[key].product._id === product._id) {
         added = true;
         alert("Item already added");
